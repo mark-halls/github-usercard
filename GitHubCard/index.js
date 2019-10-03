@@ -91,7 +91,8 @@ const UserCard = obj => {
   const profileUrl = document.createElement("a");
   profileUrl.href = obj.html_url;
   profileUrl.textContent = obj.html_url;
-  profile.textContent = `Profile: ${profileUrl}`;
+  profile.textContent = `Profile: `;
+  profile.appendChild(profileUrl);
   cardInfo.appendChild(profile);
 
   const followers = document.createElement("p");
