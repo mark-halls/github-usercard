@@ -52,14 +52,18 @@ const followersArray = [
   "bigknell"
 ];
 
-followersArray.forEach(follower => {
-  axios
-    .get(`https://api.github.com/users/${follower}`)
-    .then(res =>
-      document.querySelector(".cards").appendChild(UserCard(res.data))
-    )
-    .catch(err => console.log(err));
-});
+axios
+  .get("https://api.github.com/users/mark-halls/followers")
+  .then(res =>
+    res.data.forEach(user => {
+      axios
+        .get(`https://api.github.com/users/${user.login}`)
+        .then(res =>
+          document.querySelector(".cards").appendChild(UserCard(res.data))
+        );
+    })
+  )
+  .catch(err => console.error(err));
 
 const UserCard = obj => {
   const card = document.createElement("div");
